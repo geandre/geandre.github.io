@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Geandre Miranda</title>
+  <style>
+    /*
+CSS code released under the following license:
+
+The ISC License
+
+Copyright (c) Isaac Z. Schlueter
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
+IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+*/
+
+    * {
+      font-family: Triplicate T4, monospace;
+      font-size: 1em;
+      border: 0;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-weight: normal;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    ul,
+    ol,
+    p,
+    pre,
+    li {
+      margin-bottom: 1em
+    }
+
+    strong,
+    b {
+      font-weight: bold
+    }
+
+    em,
+    i {
+      font-style: italic
+    }
+
+    hr::before {
+      display: block;
+      height: 2em;
+      content: "----";
+      color: #f0f
+    }
+
+    strong::before,
+    strong::after,
+    b::before,
+    b::after {
+      content: "**"
+    }
+
+    em::before,
+    em::after,
+    i::before,
+    i::after {
+      content: "_"
+    }
+
+    blockquote,
+    pre,
+    code {
+      background: #fafafa;
+      color: #000;
+      padding: 0.5em;
+    }
+
+    pre {
+      overflow: auto
+    }
+
+    pre::before,
+    pre::after {
+      content: "```";
+      display: block
+    }
+
+    code::before,
+    code::after {
+      content: "`";
+      background: #fff
+    }
+
+    pre code::before,
+    pre code::after {
+      content: ""
+    }
+
+    ol li {
+      margin-left: 4ex;
+    }
+
+    ul li {
+      margin-left: 3ex;
+    }
+
+    ol li {
+      list-style: decimal outside
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: #900;
+      margin-top: 2em
+    }
+
+    h1 code,
+    h2 code,
+    h3 code,
+    h4 code,
+    h5 code,
+    h6 code {
+      background: #fff
+    }
+
+    h1::before {
+      content: "# ";
+      color: #09a
+    }
+
+    h2::before {
+      content: "## ";
+      color: #09a
+    }
+
+    h3::before {
+      content: "### ";
+      color: #09a
+    }
+
+    h4::before {
+      content: "#### ";
+      color: #09a
+    }
+
+    h5::before {
+      content: "##### ";
+      color: #09a
+    }
+
+    h6::before {
+      content: "###### ";
+      color: #09a
+    }
+
+    ul li::before {
+      content: "* ";
+      display: block;
+      margin-left: -3ex;
+      color: #fb0;
+      float: left
+    }
+
+    body {
+      width: 100ex;
+      margin: 1em auto
+    }
+
+    a {
+      text-decoration: none
+    }
+
+    a:hover::before,
+    a:hover::after {
+      color: #f00;
+      text-decoration: underline
+    }
+
+    a::before {
+      content: "["
+    }
+
+    a::after {
+      content: "]"
+    }
+
+    @media print {
+      body {
+        width: auto;
+        font-size: 10pt
+      }
+    }
+  </style>
+  <style>
+    img {
+      margin-right: 3px;
+    }
+
+    p.techs>span {
+      float: left;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <meta http-equiv="refresh" content="2">
+</head>
+
+<body>
+  <div id="app">
+    <h1>{{ name }}</h1>
+    <p>
+      <a :href="'mailto:'+email">{{ email }}</a>
+      <a :href="twitter">twitter</a>
+      <a :href="facebook">facebook</a>
+    </p>
+    <h2>Status</h2>
+    <p>
+      <blockquote>{{ status }}</blockquote>
+    </p>
+    <h2>Projects</h2>
+    <ul>
+      <li v-for="project in projects" :key="project.title">
+        <a :href="project.link">{{ project.title }}</a> - {{ project.description }}
+      </li>
+    </ul>
+    <h2>Work</h2>
+    <ul>
+      <li v-for="work in works" :key="work.from">
+        {{ work.from }} ~ {{ work.to }}: {{ work.where }} // {{ work.as }}
+      </li>
+    </ul>
+    <h2>Technologies that I played with</h2>
+    <p class="techs">
+      <span v-for="lang in langs">
+        <img :src="'https://badgen.net/badge/lang/'+lang+'/blue'" />
+      </span>
+      <span v-for="framework in frameworks">
+        <img :src="'https://badgen.net/badge/framework/'+framework+'/green'" />
+      </span>
+      <span v-for="lib in libs">
+        <img :src="'https://badgen.net/badge/lib/'+lib+'/purple'" />
+      </span>
+      <span v-for="pattern in patterns">
+        <img :src="'https://badgen.net/badge/pattern/'+pattern+'/orange'" />
+      </span>
+      <span v-for="db in dbms">
+        <img :src="'https://badgen.net/badge/db/'+db+'/pink'" />
+      </span>
+    </p>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        name: 'Geandre Miranda',
+        email: 'geandremiranda.ms@gmail.com',
+        twitter: 'https://twitter.com/geandremiranda',
+        facebook: 'https://www.facebook.com/geandre.miranda',
+        status: "Employed as Web developer in Sorriso, Brasil.",
+        projects: [
+          {
+            title: 'VueCheck',
+            link: 'https://geandre.github.io/vue-check/',
+            description: 'A Vue plugin to check data objects',
+          }
+        ],
+        works: [
+          { from: '2017/11', to: 'Present', where: 'Geatech Soluções', as: 'Web Developer' },
+          { from: '2017/09', to: '2017/11', where: 'SENAI', as: 'IT teacher' },
+          { from: '2013/05', to: '2017/09', where: '3C Desenvolvimento', as: 'Web Developer' },
+        ],
+        academics: [
+          'Technologist in Systems Analysis and Development',
+          'Some other small courses related to web development.',
+        ],
+        langs: ['PHP7', 'HTML5', 'CSS3', 'JavaScript', 'Java', 'C++'],
+        frameworks: ['Vue.js', 'Laravel', 'Lumen', 'Slim'],
+        libs: ['jQuery', 'Lodash', 'FPDF', 'Passport', 'L5-Repository', 'Vuex', 'VueRouter'],
+        patterns: ['oAuth', 'REST', 'SOA', 'Material Design', 'MVC', 'Repository'],
+        dbms: ['PostgreSQL'],
+      },
+    });
+  </script>
+</body>
+
+</html>
